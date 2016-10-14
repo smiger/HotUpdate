@@ -1,0 +1,8 @@
+{
+	"packageUrl" : "http://116.31.118.205:81",
+	"remoteManifestUrl" : "http://116.31.118.205:81/project_dev.manifest",
+	"remoteManifestUrl_2" : "http://119.63.38.205:82/project_dev2.manifest",
+	"version" : "1.7.8",
+	"engineVersion" : "3.0 beta"
+	
+}
