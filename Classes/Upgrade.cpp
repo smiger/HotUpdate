@@ -97,11 +97,11 @@ void Upgrade::initDownloadDir()
 	_pathToSave += DOWNLOAD_FIEL;
 	log("Path: %s ", _pathToSave.c_str());
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32)
-	DIR *pDir = NULL;
-	if(!pDir)
-	{
-		mkdir(_pathToSave.c_str(), S_IRWXG | S_IRWXO);
-	}
+	//DIR *pDir = NULL;
+	//if(!pDir)
+	//{
+	//	mkdir(_pathToSave.c_str(), S_IRWXG | S_IRWXO);
+	//}
 #else
 	if((GetFileAttributesA(_pathToSave.c_str())) == INVALID_FILE_ATTRIBUTES)
 	{
@@ -116,9 +116,9 @@ void Upgrade::reset(Ref* pSender)
 	_showDownloadInfo->setString("");
 	//Remove downloaded files
 #if(CC_TARGET_PLATFORM != CC_PLATFORM_WIN32)
-	string command = "rm -r ";
-	command += "\"" + _pathToSave + "\"";
-	system(command.c_str());
+	//string command = "rm -r ";
+	//command += "\"" + _pathToSave + "\"";
+	//system(command.c_str());
 #else
 	std::string command = "rd /s /q ";
 	command += "\"" + _pathToSave + "\"";

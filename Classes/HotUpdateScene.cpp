@@ -1,7 +1,7 @@
 #include "HotUpdateScene.h"
 #include "cocostudio/CocoStudio.h"
-//#include "LoadingUIScene.h"
-//#include "../Data/Platform.h"
+#include "HelloWorldScene.h"
+#include "Platform.h"
 
 
 #define DOWNLOAD_FIEL	 "Resources"	//下载后保存的文件夹名
@@ -96,8 +96,8 @@ void HotUpdateScene::touchEvent(Ref* pSender, ui::Widget::TouchEventType type)
 				}
 				else
 				{
-					//auto loadingUIScene=LoadingUIScene::createScene();
-					//Director::getInstance()->replaceScene(loadingUIScene);
+					auto loadingUIScene=HelloWorld::createScene();
+					Director::getInstance()->replaceScene(loadingUIScene);
 				}
 			}
 		}
@@ -114,8 +114,8 @@ void HotUpdateScene::onError(AssetsManager::ErrorCode errorCode)
 	if(errorCode == AssetsManager::ErrorCode::NO_NEW_VERSION)
 	{
 		Tip->setString("no new version");
-		//auto loadingUIScene=LoadingUIScene::createScene();
-		//Director::getInstance()->replaceScene(loadingUIScene);
+		auto loadingUIScene=HelloWorld::createScene();
+		Director::getInstance()->replaceScene(loadingUIScene);
 	}
 	else if (errorCode == AssetsManager::ErrorCode::NETWORK)
 	{
@@ -149,11 +149,14 @@ void HotUpdateScene::onProgress(int percent)
 }
 void HotUpdateScene::onSuccess()
 {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	Platform pf;
+	pf.loadsoFile();
+#endif
 	log("download success");
 	Tip->setString("download success");
-	//auto loadingUIScene=LoadingUIScene::createScene();
-	//Director::getInstance()->replaceScene(loadingUIScene);
-	//std::string path = FileUtils::getInstance()->getWritablePath() + DOWNLOAD_FIEL;
+	auto loadingUIScene=HelloWorld::createScene();
+	Director::getInstance()->replaceScene(loadingUIScene);
 }
 
 AssetsManager* HotUpdateScene::getAssetManager()
@@ -178,6 +181,7 @@ void HotUpdateScene::initDownloadDir()
 	_pathToSave = FileUtils::getInstance()->getWritablePath();
 	_pathToSave += DOWNLOAD_FIEL;
 	log("Path: %s ", _pathToSave.c_str());
+
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	//DIR *pDir = NULL;
 	//if(!pDir)
@@ -192,7 +196,7 @@ void HotUpdateScene::initDownloadDir()
 		CreateDirectoryA(_pathToSave.c_str(), 0);
 	}
 #endif
-
+	log("Path2: %s ", _pathToSave.c_str());
 }
 
 std::string  HotUpdateScene::getClientVersion()

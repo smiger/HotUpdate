@@ -50,12 +50,12 @@ void UpdateEx::InitDownLoadDirEx()
   
   
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32)  
-    DIR *pDir = NULL;  
-    pDir = opendir(m_pathToSaveEx.c_str());  
-    if (!pDir)  
-    {  
-        mkdir(m_pathToSaveEx.c_str(), S_IRWXU | S_IRWXG | S_IRWXO);  
-    }  
+    //DIR *pDir = NULL;  
+    //pDir = opendir(m_pathToSaveEx.c_str());  
+    //if (!pDir)  
+    //{  
+    //    mkdir(m_pathToSaveEx.c_str(), S_IRWXU | S_IRWXG | S_IRWXO);  
+    //}  
 #else  
     if ((GetFileAttributesA(m_pathToSaveEx.c_str())) == INVALID_FILE_ATTRIBUTES)  
     {  
